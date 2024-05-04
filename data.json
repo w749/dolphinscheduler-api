@@ -1,0 +1,10 @@
+{
+    "code": 75,
+    "msg": "in",
+    "data": {
+        "securityConfigType": "sint occaecat nostrud elit",
+        "sessionId": "25"
+    },
+    "success": false,
+    "failed": true
+}

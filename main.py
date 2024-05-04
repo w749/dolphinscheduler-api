@@ -1,9 +1,16 @@
+import json
+
 import attr
 
-from common.entity import Base
+import common.response
+import utils
+from config import *
+from common.response import Base
 from adapt.adapt import VERSION
 
 if __name__ == '__main__':
-    a = Base(2, "today is good day", {"a": 1, "b": 2}, True, True)
-    print(attr.asdict(a))
-    print(VERSION)
+    with open("/Users/wangxun/workspace/my/project/dolphscheduler-api/data.json", "r") as f:
+        js = json.load(f)
+    print(js)
+    print(utils.object_from_json(js, common.response.GetSessionId).data.securityConfigType)
+
