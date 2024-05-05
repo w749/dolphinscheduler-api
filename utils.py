@@ -1,6 +1,6 @@
 # coding=utf-8
 import requests
-from config import HEADERS
+from settings import SETTINGS
 from adapt import adapt_cattrs
 
 
@@ -17,7 +17,7 @@ def request_delete(url, params, data):
 
 
 def request_put(url, params, data, files):
-    return requests.request("PUT", url, headers=HEADERS, data=data, params=params, files=files)
+    return requests.request("PUT", url, headers=SETTINGS.HEADERS, data=data, params=params, files=files)
 
 
 def _request(url, params, data, method):
@@ -29,7 +29,7 @@ def _request(url, params, data, method):
     :param method: 请求方法
     :return: Base
     """
-    return requests.request(method, url, headers=HEADERS, data=data, params=params)
+    return requests.request(method, url, headers=SETTINGS.HEADERS, data=data, params=params)
 
 
 def object_from_json(js, clz):

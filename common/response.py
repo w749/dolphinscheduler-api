@@ -22,7 +22,7 @@ class GetSessionId(Base):
 
 
 @attrs
-class CreateToken(Base):
+class TokenCreate(Base):
     """
     创建token response
     """
@@ -30,7 +30,7 @@ class CreateToken(Base):
 
 
 @attrs
-class CreateTenant(Base):
+class TenantCreate(Base):
     """
     创建租户 response
     """
@@ -43,3 +43,59 @@ class TenantList(Base):
     获取租户列表 response
     """
     data = attrib(type=List[TenantInner], default=[TenantInner()])
+
+
+@attrs
+class QueueCreate(Base):
+    """
+    创建队列 response
+    """
+    data = attrib(type=QueueInner, default=QueueInner())
+
+
+@attrs
+class QueueList(Base):
+    """
+    获取队列列表 response
+    """
+    data = attrib(type=List[QueueInner], default=[QueueInner()])
+
+
+@attrs
+class ProjectCreate(Base):
+    """
+    创建项目 response
+    """
+    data = attrib(type=ProjectInner, default=ProjectInner())
+
+
+@attrs
+class ProjectList(Base):
+    """
+    获取项目列表 response
+    """
+    data = attrib(type=List[ProjectInner], default=[ProjectInner()])
+
+
+@attrs
+class ResourceList(Base):
+    """
+    获取资源列表 response
+    """
+    data = attrib(type=List[ResourceInner], default=[ResourceInner()])
+
+
+@attrs
+class SchedulerCreate(Base):
+    """
+    创建定时任务 response
+    """
+    data = attrib(type=SchedulerInner, default=SchedulerInner())
+
+
+@attrs
+class SchedulerList(Base):
+    """
+    获取资定时任务列表 response
+    """
+    data = attrib(type=List[SchedulerInner], default=[SchedulerInner()])
