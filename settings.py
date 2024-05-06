@@ -2,6 +2,7 @@
 import json
 import os
 
+from adapt import adapt_open
 
 """
 配置文件操作解析
@@ -33,7 +34,7 @@ class Config(object):
         if not os.path.exists(_SETTING_FILE):
             raise IOError("{} not exists".format(_SETTING_FILE))
 
-        with open(_SETTING_FILE, "r") as f:
+        with adapt_open(_SETTING_FILE, "r") as f:
             self._config = json.load(f)
 
         self._ds = self._config["ds"]
