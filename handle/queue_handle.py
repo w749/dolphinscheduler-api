@@ -8,7 +8,7 @@ import attr
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
 from common import BaseResponse, QueueCreate, QueueList
 from settings import SETTINGS
-from utils import url_join, request_post, request_get, get_logger, request_delete
+from utils import url_join, request_post, request_get, get_logger, request_delete, object_to_json
 
 
 class QueueHandle(object):
@@ -49,7 +49,7 @@ class QueueHandle(object):
         if self._verify_queue():
             queue_create_instance = request_post(self._create_queue_url, {}, {}, data, QueueCreate)
             self._logging.info("Create queue {0} success. Queue {0} info: ".format(self._queue))
-            self._logging.info(attr.asdict(queue_create_instance.data))
+            self._logging.info(object_to_json(queue_create_instance.data))
             return queue_create_instance.data.id
         else:
             self._logging.warning("Queue {} already exists.".format(self._queue))
@@ -64,7 +64,7 @@ class QueueHandle(object):
         if echo:
             self._logging.info("Get {} queues. info is: ".format(len(total_queues)))
             for queue in total_queues:
-                self._logging.info(attr.asdict(queue))
+                self._logging.info(object_to_json(queue))
         return total_queues
 
     def get_queue_id(self):

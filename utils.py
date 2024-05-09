@@ -1,9 +1,11 @@
 # coding=utf-8
+import json
 import logging
 import os.path
 
-
+import attr
 import requests
+
 from settings import SETTINGS
 from adapt import adapt_cattrs
 
@@ -90,3 +92,15 @@ def url_join(path):
     """
     base_url = SETTINGS.BASE_URL if not str(SETTINGS.BASE_URL).endswith("/") else str(SETTINGS.BASE_URL).rstrip("/")
     return base_url + path
+
+
+def object_to_json(obj):
+    """
+    将实体类格式化为json字符串
+    Args:
+        obj: 实体类
+
+    Returns:json字符串
+
+    """
+    return json.dumps(attr.asdict(obj), ensure_ascii=False, indent=4, separators=(",", ":"))

@@ -10,7 +10,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
 from handle import QueueHandle
 from common import BaseResponse, TenantCreate, TenantList
 from settings import SETTINGS
-from utils import url_join, request_post, request_get, get_logger, request_delete
+from utils import url_join, request_post, request_get, get_logger, request_delete, object_to_json
 
 
 class TenantHandle(object):
@@ -55,7 +55,7 @@ class TenantHandle(object):
         if self._verify_code():
             tenant_create_instance = request_post(self._create_tenant_url, {}, {}, data, TenantCreate)
             self._logging.info("Create tenant {0} success. Tenant {0} info: ".format(self._tenant))
-            self._logging.info(attr.asdict(tenant_create_instance.data))
+            self._logging.info(object_to_json(tenant_create_instance.data))
         else:
             self._logging.warning("Tenant {} already exists.".format(self._tenant))
 
@@ -68,7 +68,7 @@ class TenantHandle(object):
         if echo:
             self._logging.info("Get {} tenants. info is: ".format(len(total_tenants)))
             for tenant in total_tenants:
-                self._logging.info(attr.asdict(tenant))
+                self._logging.info(object_to_json(tenant))
         return total_tenants
 
     def delete_tenant(self, tenant_name):

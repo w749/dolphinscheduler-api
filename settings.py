@@ -43,6 +43,7 @@ class Config(object):
         self.PASSWORD = self._ds["password"]
         self.TOKEN_EXPIRE_TIME = self._ds["tokenExpireTime"]
         self.TOKEN = self._ds["token"]
+        self.PROJECT = self._ds["project"]
         self.TENANT = self._ds["tenant"]
         self.QUEUE = self._ds["queue"]
         self.HEADERS = {

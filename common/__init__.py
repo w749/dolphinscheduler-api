@@ -5,6 +5,7 @@ __all__ = [
     "TokenCreate",
     "TokenList",
     "ProjectCreate",
+    "ProjectInner",
     "ProjectList",
     "QueueCreate",
     "QueueList",
@@ -16,3 +17,4 @@ __all__ = [
 ]
 
 from .response import *
+from .response_inner import ProjectInner
