@@ -1,3 +1,5 @@
+from typing import List
+
 from attr import attrs, attrib
 
 
@@ -21,6 +23,16 @@ class CreateTokenInner(Inner):
     createTime = attrib(type=str, default="")
     updateTime = attrib(type=str, default="")
     userName = attrib(type=str, default="")
+
+
+@attrs
+class TokenListInner(Inner):
+    totalList = attrib(type=List[CreateTokenInner], default=[CreateTokenInner()])
+    total = attrib(type=int, default=-1)
+    totalPage = attrib(type=str, default="")
+    pageSize = attrib(type=int, default=-1)
+    currentPage = attrib(type=int, default=-1)
+    pageNo = attrib(type=int, default=-1)
 
 
 @attrs

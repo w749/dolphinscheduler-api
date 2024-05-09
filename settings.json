@@ -1,8 +1,9 @@
 {
   "ds":{
-    "baseUrl":"http://10.10.3.14:12345",
+    "baseUrl":"http://10.10.3.14:12345/dolphinscheduler",
     "username":"admin",
     "password":"dolphinscheduler123",
-    "token":"123"
+    "tokenExpireTime":"2026-01-01 00:00:00",
+    "token":"07b2d423fd298b7bfa1fc065554fac86"
   }
 }

@@ -1,6 +1,8 @@
 import platform
 
-
+"""
+解决python2和python3的兼容性问题
+"""
 VERSION = int(platform.python_version()[0])
 
 if VERSION == 2:

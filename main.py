@@ -1,18 +1,16 @@
-import json
-import common
-import utils
-from settings import SETTINGS
+import argparse
+import subprocess
 
-from adapt import default_encoding, adapt_open
+from adapt import default_encoding
 default_encoding()
 
 if __name__ == '__main__':
-    with adapt_open("data.json", "r") as f:
-        js = json.load(f)
-    print(js)
-    print(utils.object_from_json(js, common.ProjectList).data[0].description)
+    parser = argparse.ArgumentParser(description="Dolphin Scheduler operation.", add_help=False)
+    parser.add_argument("--token", action="store_true", help="create DS token")
+    args, unknown = parser.parse_known_args()
 
-    print(SETTINGS.BASE_URL)
-    print(SETTINGS.USERNAME)
-    print(SETTINGS.PASSWORD)
+    if args.token:
+        subprocess.run(["python", "request/create_token.py"] + unknown)
+    else:
+        parser.print_help()
 

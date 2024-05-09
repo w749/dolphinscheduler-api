@@ -14,6 +14,14 @@ class Base(object):
 
 
 @attrs
+class BaseResponse(Base):
+    """
+    基础response
+    """
+    data = attrib(type=str, default="")
+
+
+@attrs
 class GetSessionId(Base):
     """
     获取SessionId response
@@ -27,6 +35,14 @@ class TokenCreate(Base):
     创建token response
     """
     data = attrib(type=CreateTokenInner, default=CreateTokenInner())
+
+
+@attrs
+class TokenList(Base):
+    """
+    创建token response
+    """
+    data = attrib(type=TokenListInner, default=TokenListInner())
 
 
 @attrs
