@@ -58,10 +58,11 @@ def _request(url, headers, params, data, method, clz):
     if not headers:
         headers = SETTINGS.HEADERS
     response = requests.request(method, url, headers=headers, data=data, params=params)
-    if response.status_code != 200 and response.status_code != 201:
+    if response.status_code != 200 and response.status_code != 201 and not response.json()["success"]:
         _logging.error("Request {} error".format(url))
         _logging.error(response.text)
         raise RuntimeError()
+    _logging.info("Request {} success.".format(response.url))
     return object_from_json(response.json(), clz)
 
 

@@ -43,6 +43,7 @@ class Config(object):
         self.PASSWORD = self._ds["password"]
         self.TOKEN_EXPIRE_TIME = self._ds["tokenExpireTime"]
         self.TOKEN = self._ds["token"]
+        self.TENANT = self._ds["tenant"]
         self.HEADERS = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                           "Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0",
