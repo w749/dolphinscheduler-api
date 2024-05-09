@@ -3,7 +3,6 @@ import argparse
 import os.path
 import sys
 
-import attr
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
 from common import BaseResponse, QueueCreate, QueueList
@@ -98,7 +97,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler queue operation.")
     parser.add_argument("-c", "--create", action="store_true", help="create queue")
     parser.add_argument("-l", "--list", action="store_true", help="get queue list")
-    parser.add_argument("-d", "--delete", help="delete the provided queue ")
+    parser.add_argument("-d", "--delete", help="delete the provided queue")
     args = parser.parse_args()
 
     handle = QueueHandle()

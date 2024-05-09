@@ -1,11 +1,9 @@
 # coding=utf-8
 import argparse
 import ast
-import json
 import os.path
 import sys
 
-import attr
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
 from common import BaseResponse, ProjectList, ProjectInner
@@ -31,10 +29,10 @@ class ProjectHandle(object):
         data = {
             "projectName": self._project,
         }
-        base_dict_instance = request_post(self._create_project_url, {}, {}, data, BaseResponse)
-        if base_dict_instance.code == 0:
+        base_instance = request_post(self._create_project_url, {}, {}, data, BaseResponse)
+        if base_instance.code == 0:
             # 将单引号形式的字典字符串转为字典
-            project_dict = ast.literal_eval(base_dict_instance.data)
+            project_dict = ast.literal_eval(base_instance.data)
             project_instance = object_from_json(project_dict, ProjectInner)
             self._logging.info("Create project {0} success. project {0} info: ".format(self._project))
             self._logging.info(object_to_json(project_instance))
@@ -89,7 +87,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler project operation.")
     parser.add_argument("-c", "--create", action="store_true", help="create project")
     parser.add_argument("-l", "--list", action="store_true", help="get project list")
-    parser.add_argument("-d", "--delete", help="delete the provided project ")
+    parser.add_argument("-d", "--delete", help="delete the provided project")
     args = parser.parse_args()
 
     handle = ProjectHandle()

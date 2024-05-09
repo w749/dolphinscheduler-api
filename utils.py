@@ -27,23 +27,26 @@ _logging = get_logger(os.path.basename(__file__))
 
 
 def request_post(url, headers, params, data, clz):
-    return _request(url, headers, params, data, "POST", clz)
+    return _request(url, headers, params, data, {}, "POST", clz)
 
 
 def request_get(url, headers, params, data, clz):
-    return _request(url, headers, params, data, "GET", clz)
+    return _request(url, headers, params, data, {}, "GET", clz)
 
 
 def request_delete(url, headers, params, data, clz):
-    return _request(url, headers, params, data, "DELETE", clz)
+    return _request(url, headers, params, data, {}, "DELETE", clz)
 
 
-def request_put(url, params, data, files, clz):
-    text = requests.request("PUT", url, headers=SETTINGS.HEADERS, data=data, params=params, files=files)
-    return object_from_json(text, clz)
+def request_put_files(url, params, data, files, clz):
+    return _request(url, {}, params, data, files, "PUT", clz)
 
 
-def _request(url, headers, params, data, method, clz):
+def request_post_files(url, params, data, files, clz):
+    return _request(url, {}, params, data, files, "POST", clz)
+
+
+def _request(url, headers, params, data, files, method, clz):
     """
     所有的request请求封装
     Args:
@@ -51,6 +54,7 @@ def _request(url, headers, params, data, method, clz):
         headers: 额外headers
         params: 请求query参数
         data: 表单数据
+        files: 文件
         method: 表单字典
         clz: Base的子类
 
@@ -59,7 +63,7 @@ def _request(url, headers, params, data, method, clz):
     """
     if not headers:
         headers = SETTINGS.HEADERS
-    response = requests.request(method, url, headers=headers, data=data, params=params)
+    response = requests.request(method, url, headers=headers, data=data, params=params, files=files)
     if response.status_code != 200 and response.status_code != 201 and not response.json()["success"]:
         _logging.error("Request {} error".format(url))
         _logging.error(response.text)
@@ -103,4 +107,4 @@ def object_to_json(obj):
     Returns:json字符串
 
     """
-    return json.dumps(attr.asdict(obj), ensure_ascii=False, indent=4, separators=(",", ":"))
+    return json.dumps(attr.asdict(obj), ensure_ascii=False, separators=(",", ":"))
