@@ -5,7 +5,9 @@ import sys
 
 import attr
 
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
+from handle import QueueHandle
 from common import BaseResponse, TenantCreate, TenantList
 from settings import SETTINGS
 from utils import url_join, request_post, request_get, get_logger, request_delete
@@ -94,7 +96,8 @@ if __name__ == '__main__':
     handle = TenantHandle()
 
     if args.create:
-        handle.create_tenant("1")
+        queue_handle = QueueHandle()
+        handle.create_tenant(queue_handle.get_queue_id())
     elif args.list:
         handle.tenant_list(True)
     elif args.delete:
