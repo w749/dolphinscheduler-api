@@ -60,7 +60,7 @@ class ProjectHandle(object):
         project_list = self.project_list(False)
         project_filter = list(filter(lambda x: x.name == self._project, project_list))
         if len(project_filter) > 0:
-            return project_filter[0].id
+            return project_filter[0].code
         else:
             self._logging.error("Project {} not exists, now create it.".format(self._project))
             return self.create_project()

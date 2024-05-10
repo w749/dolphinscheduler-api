@@ -11,6 +11,7 @@ if __name__ == '__main__':
     parser.add_argument("--tenant", action="store_true", help="DS tenant operation")
     parser.add_argument("--queue", action="store_true", help="DS queue operation")
     parser.add_argument("--resource", action="store_true", help="DS resource operation")
+    parser.add_argument("--process", action="store_true", help="DS process definition operation")
     args, unknown = parser.parse_known_args()
 
     if args.token:
@@ -23,6 +24,8 @@ if __name__ == '__main__':
         subprocess.run(["python", "handle/queue_handle.py"] + unknown)
     elif args.resource:
         subprocess.run(["python", "handle/resource_handle.py"] + unknown)
+    elif args.process:
+        subprocess.run(["python", "handle/process_handle.py"] + unknown)
     else:
         parser.print_help()
 

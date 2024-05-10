@@ -86,6 +86,21 @@ class ResourceInner(Inner):
 
 
 @attrs
+class ProcessInnerSon(Inner):
+    code = attrib(type=int, default=-1)
+    name = attrib(type=str, default="")
+    releaseState = attrib(type=str, default="")
+    projectCode = attrib(type=int, default=-1)
+    createTime = attrib(type=str, default="")
+    updateTime = attrib(type=str, default="")
+
+
+@attrs
+class ProcessInner(Inner):
+    processDefinition = attrib(type=ProcessInnerSon, default=ProcessInnerSon())
+
+
+@attrs
 class SchedulerInner(Inner):
     id = attrib(type=int, default=-1)
     processDefinitionCode = attrib(type=int, default=-1)

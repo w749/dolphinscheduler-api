@@ -12,6 +12,8 @@ __all__ = [
     "TenantCreate",
     "TenantList",
     "ResourceList",
+    "ProcessList",
+    "ProcessUpdate",
     "SchedulerCreate",
     "SchedulerList"
 ]

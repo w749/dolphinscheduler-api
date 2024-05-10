@@ -102,6 +102,22 @@ class ResourceList(Base):
 
 
 @attrs
+class ProcessList(Base):
+    """
+    获取工作流列表 response
+    """
+    data = attrib(type=List[ProcessInner], default=[ProcessInner()])
+
+
+@attrs
+class ProcessUpdate(Base):
+    """
+    更新工作流 response
+    """
+    data = attrib(type=ProcessInnerSon, default=ProcessInnerSon())
+
+
+@attrs
 class SchedulerCreate(Base):
     """
     创建定时任务 response
