@@ -54,7 +54,7 @@ class QueueHandle(object):
             self._logging.warning("Queue {} already exists.".format(self._queue))
             return -1
 
-    def queue_list(self, echo):
+    def queue_list(self, echo=True):
         """
         获取队列列表
         """
@@ -95,8 +95,8 @@ class QueueHandle(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler queue operation.")
-    parser.add_argument("-c", "--create", action="store_true", help="create queue")
     parser.add_argument("-l", "--list", action="store_true", help="get queue list")
+    parser.add_argument("-c", "--create", action="store_true", help="create queue")
     parser.add_argument("-d", "--delete", help="delete the provided queue")
     args = parser.parse_args()
 
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     if args.create:
         handle.create_queue()
     elif args.list:
-        handle.queue_list(True)
+        handle.queue_list()
     elif args.delete:
         handle.delete_queue(args.delete)
     else:

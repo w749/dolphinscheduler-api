@@ -32,7 +32,7 @@ class ProcessHandle(object):
         self._operate_process_url = url_join("/projects/" + self._project_code + "/process-definition/{}")
         self._verify_name_url = url_join("/projects/" + self._project_code + "/process-definition/verify-name")
 
-    def process_list(self, echo):
+    def process_list(self, echo=True):
         """
         获取工作流列表
         """
@@ -84,11 +84,11 @@ class ProcessHandle(object):
         base_instance = request_post_files(self._import_process_url, {}, {}, files, BaseResponse)
         if base_instance.code == 0:
             self._logging.info("Process import success of {}".format(filepath))
-            self.process_list(True)
+            self.process_list()
         else:
             self._logging.error("Process import failed of {}, msg is '{}'".format(filepath, base_instance.msg))
 
-    def release_process(self, process_code, is_online):
+    def release_process(self, process_code, is_online=True):
         """
         上下线工作流
         Args:
@@ -133,7 +133,7 @@ class ProcessHandle(object):
             else:
                 self._logging.error("Process {} delete failed, msg is '{}'".format(process_code, base_instance.msg))
 
-    def update_process(self, filepath, is_help):
+    def update_process(self, filepath, is_help=False):
         """
         更新工作流
         Args:
@@ -205,27 +205,27 @@ if __name__ == '__main__':
     parser.add_argument("-e", "--export", help="export process, need process code, run -l get it")
     parser.add_argument("-u", "--inline", help="inline process, need process code, run -l get it")
     parser.add_argument("-o", "--offline", help="offline process, need process code, run -l get it")
-    parser.add_argument("-d", "--delete", help="delete process, need process code, run -l get it")
     parser.add_argument("-p", "--update", help="update process, need a filepath")
     parser.add_argument("-r", "--reference", action="store_true", help="update process reference")
+    parser.add_argument("-d", "--delete", help="delete process, need process code, run -l get it")
     args = parser.parse_args()
 
     handle = ProcessHandle()
 
     if args.list:
-        handle.process_list(True)
+        handle.process_list()
     elif args.im:
         handle.import_process(args.im)
     elif args.export:
         handle.export_process(args.export)
     elif args.inline:
-        handle.release_process(args.inline, True)
+        handle.release_process(args.inline)
     elif args.offline:
         handle.release_process(args.offline, False)
     elif args.delete:
         handle.delete_process(args.delete)
     elif args.update:
-        handle.update_process(args.update, False)
+        handle.update_process(args.update)
     elif args.reference:
         handle.update_process(args.update, True)
     else:

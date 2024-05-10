@@ -41,7 +41,7 @@ class ProjectHandle(object):
             self._logging.warning("Project {} already exists.".format(self._project))
             return -1
 
-    def project_list(self, echo):
+    def project_list(self, echo=True):
         """
         获取项目列表
         """
@@ -85,8 +85,8 @@ class ProjectHandle(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler project operation.")
-    parser.add_argument("-c", "--create", action="store_true", help="create project")
     parser.add_argument("-l", "--list", action="store_true", help="get project list")
+    parser.add_argument("-c", "--create", action="store_true", help="create project")
     parser.add_argument("-d", "--delete", help="delete the provided project")
     args = parser.parse_args()
 
@@ -95,7 +95,7 @@ if __name__ == '__main__':
     if args.create:
         handle.create_project()
     elif args.list:
-        handle.project_list(True)
+        handle.project_list()
     elif args.delete:
         handle.delete_project(args.delete)
     else:

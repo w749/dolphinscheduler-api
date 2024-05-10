@@ -24,7 +24,7 @@ class ResourceHandle(object):
         self._resources_url = url_join("/resources")
         self._resource_list_url = url_join("/resources/list")
 
-    def resource_list(self, echo):
+    def resource_list(self, echo=True):
         """
         获取资源列表
         """
@@ -127,10 +127,10 @@ class ResourceHandle(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler resource operation.")
+    parser.add_argument("-l", "--list", action="store_true", help="get resource list")
     parser.add_argument("-p", "--upload", help="upload resource")
     parser.add_argument("-u", "--update", help="update resource")
     parser.add_argument("-d", "--delete", help="delete the provided resource")
-    parser.add_argument("-l", "--list", action="store_true", help="get resource list")
     args = parser.parse_args()
 
     handle = ResourceHandle()
@@ -142,6 +142,6 @@ if __name__ == '__main__':
     elif args.delete:
         handle.delete_resource(args.delete)
     elif args.list:
-        handle.resource_list(True)
+        handle.resource_list()
     else:
         parser.print_help()
