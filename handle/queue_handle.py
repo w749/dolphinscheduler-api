@@ -97,7 +97,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler queue operation.")
     parser.add_argument("-l", "--list", action="store_true", help="get queue list")
     parser.add_argument("-c", "--create", action="store_true", help="create queue")
-    parser.add_argument("-d", "--delete", help="delete the provided queue")
+    parser.add_argument("-d", "--delete", metavar="queue_name", help="delete the provided queue")
     args = parser.parse_args()
 
     handle = QueueHandle()

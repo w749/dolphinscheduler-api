@@ -201,13 +201,13 @@ class ProcessHandle(object):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler process operation.")
     parser.add_argument("-l", "--list", action="store_true", help="get process list")
-    parser.add_argument("-i", "--import", dest="im", help="import process, need a filepath")
-    parser.add_argument("-e", "--export", help="export process, need process code, run -l get it")
-    parser.add_argument("-u", "--inline", help="inline process, need process code, run -l get it")
-    parser.add_argument("-o", "--offline", help="offline process, need process code, run -l get it")
-    parser.add_argument("-p", "--update", help="update process, need a filepath")
-    parser.add_argument("-r", "--reference", action="store_true", help="update process reference")
-    parser.add_argument("-d", "--delete", help="delete process, need process code, run -l get it")
+    parser.add_argument("-i", "--import", dest="im", metavar="filepath", help="import process, need a filepath")
+    parser.add_argument("-e", "--export", metavar="code", help="export process, need process code, run -l get it")
+    parser.add_argument("-u", "--inline", metavar="code", help="inline process, need process code, run -l get it")
+    parser.add_argument("-o", "--offline", metavar="code", help="offline process, need process code, run -l get it")
+    parser.add_argument("-p", "--update", metavar="code", help="update process, need a filepath")
+    parser.add_argument("-r", "--update-help", dest="ref", action="store_true", help="update process help")
+    parser.add_argument("-d", "--delete", metavar="code", help="delete process, need process code, run -l get it")
     args = parser.parse_args()
 
     handle = ProcessHandle()
@@ -226,7 +226,7 @@ if __name__ == '__main__':
         handle.delete_process(int(args.delete))
     elif args.update:
         handle.update_process(args.update)
-    elif args.reference:
+    elif args.ref:
         handle.update_process(args.update, True)
     else:
         parser.print_help()

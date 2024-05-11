@@ -87,7 +87,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler project operation.")
     parser.add_argument("-l", "--list", action="store_true", help="get project list")
     parser.add_argument("-c", "--create", action="store_true", help="create project")
-    parser.add_argument("-d", "--delete", help="delete the provided project")
+    parser.add_argument("-d", "--delete", metavar="project_name", help="delete the provided project")
     args = parser.parse_args()
 
     handle = ProjectHandle()

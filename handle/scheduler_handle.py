@@ -181,10 +181,10 @@ class SchedulerHandle(object):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler queue operation.")
     parser.add_argument("-l", "--list", action="store_true", help="get scheduler list")
-    parser.add_argument("-c", "--create", help="create scheduler for process, you can run --process -l get it")
-    parser.add_argument("-u", "--update", help="update scheduler for process")
-    parser.add_argument("-o", "--online", help="online scheduler for process")
-    parser.add_argument("-f", "--offline", help="offline scheduler for process")
+    parser.add_argument("-c", "--create", metavar="code", help="create scheduler for process, run --process -l get it")
+    parser.add_argument("-u", "--update", metavar="code", help="update scheduler for process")
+    parser.add_argument("-o", "--online", metavar="code", help="online scheduler for process")
+    parser.add_argument("-f", "--offline", metavar="code", help="offline scheduler for process")
     args = parser.parse_args()
 
     handle = SchedulerHandle()

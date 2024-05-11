@@ -89,7 +89,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler tenant operation.")
     parser.add_argument("-l", "--list", action="store_true", help="get tenant list")
     parser.add_argument("-c", "--create", action="store_true", help="create tenant")
-    parser.add_argument("-d", "--delete", help="delete the provided tenant")
+    parser.add_argument("-d", "--delete", metavar="tenant_name", help="delete the provided tenant")
     args = parser.parse_args()
 
     handle = TenantHandle()

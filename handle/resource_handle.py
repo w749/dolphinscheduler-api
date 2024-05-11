@@ -109,7 +109,7 @@ class ResourceHandle(object):
 
     def delete_resource(self, resource_name):
         """
-        删除租户
+        删除资源
         """
         resource_list = self.resource_list(False)
         resource_filter = list(filter(lambda x: x.name == resource_name, resource_list))
@@ -128,9 +128,9 @@ class ResourceHandle(object):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler resource operation.")
     parser.add_argument("-l", "--list", action="store_true", help="get resource list")
-    parser.add_argument("-p", "--upload", help="upload resource")
-    parser.add_argument("-u", "--update", help="update resource")
-    parser.add_argument("-d", "--delete", help="delete the provided resource")
+    parser.add_argument("-p", "--upload", metavar="filepath", help="upload resource")
+    parser.add_argument("-u", "--update", metavar="filepath", help="update resource")
+    parser.add_argument("-d", "--delete", metavar="resource_name", help="delete the provided resource")
     args = parser.parse_args()
 
     handle = ResourceHandle()
