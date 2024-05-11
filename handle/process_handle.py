@@ -217,13 +217,13 @@ if __name__ == '__main__':
     elif args.im:
         handle.import_process(args.im)
     elif args.export:
-        handle.export_process(args.export)
+        handle.export_process(int(args.export))
     elif args.inline:
-        handle.release_process(args.inline)
+        handle.release_process(int(args.inline))
     elif args.offline:
-        handle.release_process(args.offline, False)
+        handle.release_process(int(args.offline), False)
     elif args.delete:
-        handle.delete_process(args.delete)
+        handle.delete_process(int(args.delete))
     elif args.update:
         handle.update_process(args.update)
     elif args.reference:

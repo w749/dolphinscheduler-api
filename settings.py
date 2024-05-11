@@ -46,6 +46,7 @@ class Config(object):
         self.PROJECT = self._ds["project"]
         self.TENANT = self._ds["tenant"]
         self.QUEUE = self._ds["queue"]
+        self.SCHEDULER_FILE = self._ds["schedulerFile"]
         self.HEADERS = {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
                           "Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0",

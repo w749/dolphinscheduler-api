@@ -15,8 +15,9 @@ __all__ = [
     "ProcessList",
     "ProcessUpdate",
     "SchedulerCreate",
-    "SchedulerList"
+    "SchedulerList",
+    "SchedulerInner"
 ]
 
 from .response import *
-from .response_inner import ProjectInner
+from .response_inner import ProjectInner, SchedulerInner

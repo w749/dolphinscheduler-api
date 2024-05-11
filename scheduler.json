@@ -1,0 +1,6 @@
+{
+    "startTime": "2024-04-28 00:00:00",
+    "endTime": "2124-04-28 00:00:00",
+    "crontab": "0 0 10 * * ? *",
+    "timezoneId": "Asia/Shanghai"
+}

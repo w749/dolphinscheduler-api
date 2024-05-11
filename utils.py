@@ -152,7 +152,23 @@ def write_file(filepath, content, is_del):
             os.remove(filepath)
         else:
             _logging.error("File {} already exists, please remove it first.".format(filepath))
-            return
+            sys.exit(-1)
     with open(filepath, "w") as w:
         w.write(content)
     _logging.info("Write content to file {} success.".format(filepath))
+
+
+def read_file(filepath):
+    """
+    读取filepath内容并返回
+    Args:
+        filepath: 文件路径
+
+    Returns:文件内容
+
+    """
+    if not os.path.exists(filepath):
+        _logging.error("File {} not exists.".format(filepath))
+        sys.exit(-1)
+    with open(filepath, "rb") as r:
+        return r.read()
