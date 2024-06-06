@@ -1,5 +1,6 @@
 # coding=utf-8
 import argparse
+import ast
 import json
 import os.path
 import sys
@@ -8,9 +9,9 @@ import time
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
 from handle import ProjectHandle
-from common import BaseResponse, ProcessList, ProcessUpdate
+from common import BaseResponse, ProcessList, ProcessUpdate, ProcessInnerSon
 from utils import url_join, request_post, request_get, get_logger, request_delete, object_to_json, request_text, \
-    write_file, request_post_files, request_put
+    write_file, request_post_files, request_put, object_from_json
 
 
 class ProcessHandle(object):
@@ -183,18 +184,21 @@ class ProcessHandle(object):
                 "executionType": "PARALLEL",
                 "timeout": 0,
                 "description": "",
-                "releaseState": "ONLINE",
-                "locations": json.dumps(content["processDefinition"]["locations"]),
+                "releaseState": "OFFLINE",
+                "locations": content["processDefinition"]["locations"],
                 "globalParams": json.dumps(content["processDefinition"]["globalParamList"]),
                 "taskDefinitionJson": json.dumps(content["taskDefinitionList"]),
                 "taskRelationJson": json.dumps(content["processTaskRelationList"])
                 }
-        instance = request_put(self._operate_process_url.format(process_code), {}, {}, data, ProcessUpdate)
+        instance = request_put(self._operate_process_url.format(process_code), {}, {}, data, BaseResponse)
         if instance.code == 0:
+            # 将单引号形式的字典字符串转为字典
+            process_dict = ast.literal_eval(instance.data)
+            process_instance = object_from_json(process_dict, ProcessInnerSon)
             self._logging.info("Process {}({}) update success, process info is '{}'".format(
-                process_code, process_name, object_to_json(instance.data)))
+                process_code, process_name, object_to_json(process_instance)))
         else:
-            self._logging.error("Process {}({}) update failed, msg is '{}'".format(
+            self._logging.error("Process {}({}) update failed, maybe process is online, msg is '{}'".format(
                 process_code, process_name, instance.msg))
 
 
@@ -203,11 +207,11 @@ if __name__ == '__main__':
     parser.add_argument("-l", "--list", action="store_true", help="get process list")
     parser.add_argument("-i", "--import", dest="im", metavar="filepath", help="import process, need a filepath")
     parser.add_argument("-e", "--export", metavar="code", help="export process, need process code, run -l get it")
-    parser.add_argument("-u", "--inline", metavar="code", help="inline process, need process code, run -l get it")
+    parser.add_argument("-n", "--inline", metavar="code", help="inline process, need process code, run -l get it")
     parser.add_argument("-o", "--offline", metavar="code", help="offline process, need process code, run -l get it")
-    parser.add_argument("-p", "--update", metavar="code", help="update process, need a filepath")
-    parser.add_argument("-r", "--update-help", dest="ref", action="store_true", help="update process help")
     parser.add_argument("-d", "--delete", metavar="code", help="delete process, need process code, run -l get it")
+    parser.add_argument("-u", "--update", metavar="filepath", help="update process, need a filepath")
+    parser.add_argument("-p", "--update-help", dest="ref", action="store_true", help="update process help")
     args = parser.parse_args()
 
     handle = ProcessHandle()

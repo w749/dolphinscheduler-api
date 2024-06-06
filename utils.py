@@ -3,6 +3,7 @@ import json
 import logging
 import os.path
 import sys
+from enum import Enum
 
 import attr
 import requests
@@ -124,15 +125,18 @@ def url_join(path):
     return base_url + path
 
 
-def object_to_json(obj):
+def object_to_json(obj, pretty=False):
     """
     将实体类格式化为json字符串
     Args:
         obj: 实体类
+        pretty: 格式化输出
 
     Returns:json字符串
 
     """
+    if pretty:
+        return json.dumps(attr.asdict(obj), ensure_ascii=False, indent=4, separators=(",", ":"))
     return json.dumps(attr.asdict(obj), ensure_ascii=False, separators=(",", ":"))
 
 
@@ -172,3 +176,46 @@ def read_file(filepath):
         sys.exit(-1)
     with open(filepath, "rb") as r:
         return r.read()
+
+
+def get_attribute_of_enum(value, clz, get_name=True, default=None):
+    """
+    创建枚举类并获取它的name或value属性
+    Args:
+        value: 枚举值
+        clz: 枚举类
+        get_name: 是否获取name属性
+        default: 获取属性失败时返回默认值
+
+    Returns:枚举实例的name或value属性
+
+    """
+    if not value.isdigit() or value == "":
+        _logging.warning("Value {} is not a number, return {}.".format(value, default))
+        return default
+    if not issubclass(clz, Enum):
+        _logging.error("{} must instance of Enum.".format(clz))
+        sys.exit(-1)
+    number = int(value)
+    try:
+        enum_obj = clz(number)
+        return enum_obj.name if get_name else enum_obj.value
+    except ValueError:
+        _logging.warning("Value {} is not member of {}{}, return {}."
+                         .format(number, clz, get_enum_member_json(clz), default))
+        return default
+
+
+def get_enum_member_json(clz):
+    """
+    获取枚举类的value与name的对应值json
+    Args:
+        clz: 枚举类
+
+    Returns:枚举类json
+
+    """
+    if not issubclass(clz, Enum):
+        _logging.error("{} must instance of Enum.".format(clz))
+        sys.exit(-1)
+    return json.dumps({x.value: x.name for x in clz})

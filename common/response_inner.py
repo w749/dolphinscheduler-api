@@ -125,3 +125,53 @@ class SchedulerInner(Inner):
     environmentCode = attrib(type=int, default=-1)
     environmentName = attrib(type=str, default="")
 
+
+@attrs
+class InstanceInner(Inner):
+    id = attrib(type=int, default=-1)
+    name = attrib(type=str, default="")
+    processDefinitionCode = attrib(type=int, default=-1)
+    state = attrib(type=str, default="")
+    startTime = attrib(type=str, default="")
+    endTime = attrib(type=str, default="")
+    duration = attrib(type=str, default="")
+    tenantCode = attrib(type=str, default="")
+
+
+@attrs
+class InstanceListInner(Inner):
+    totalList = attrib(type=List[InstanceInner], default=[InstanceInner()])
+    total = attrib(type=int, default=-1)
+    totalPage = attrib(type=str, default="")
+    pageSize = attrib(type=int, default=-1)
+    currentPage = attrib(type=int, default=-1)
+    pageNo = attrib(type=int, default=-1)
+
+
+@attrs
+class InstanceGlobalParamInner(Inner):
+    prop = attrib(type=str, default="")
+    direct = attrib(type=str, default="")
+    type = attrib(type=str, default="")
+    value = attrib(type=str, default="")
+
+
+@attrs
+class InstanceVariablesInner(Inner):
+    globalParams = attrib(type=List[InstanceGlobalParamInner], default=[InstanceGlobalParamInner()])
+
+
+@attrs
+class InstanceTaskInner(Inner):
+    taskCode = attrib(type=int, default=-1)
+    taskDefinitionVersion = attrib(type=int, default=-1)
+    logPath = attrib(type=str, default="")
+    taskType = attrib(type=str, default="")
+    state = attrib(type=str, default="")
+    appLink = attrib(type=str, default="")
+    name = attrib(type=str, default="")
+
+
+@attrs
+class InstanceTaskListInner(Inner):
+    taskList = attrib(type=List[InstanceTaskInner], default=[InstanceTaskInner()])

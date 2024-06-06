@@ -128,6 +128,38 @@ class SchedulerCreate(Base):
 @attrs
 class SchedulerList(Base):
     """
-    获取资定时任务列表 response
+    获取定时任务列表 response
     """
     data = attrib(type=List[SchedulerInner], default=[SchedulerInner()])
+
+
+@attrs
+class InstanceList(Base):
+    """
+    获取工作流实例列表 response
+    """
+    data = attrib(type=InstanceListInner, default=InstanceListInner())
+
+
+@attrs
+class InstanceInfo(Base):
+    """
+    获取工作流实例列表 response
+    """
+    data = attrib(type=InstanceInner, default=InstanceInner())
+
+
+@attrs
+class InstanceVariablesList(Base):
+    """
+    获取实例变量列表 response
+    """
+    data = attrib(type=InstanceVariablesInner, default=InstanceVariablesInner())
+
+
+@attrs
+class InstanceTaskList(Base):
+    """
+    获取实例任务列表 response
+    """
+    data = attrib(type=InstanceTaskListInner, default=InstanceTaskListInner())

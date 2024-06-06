@@ -14,10 +14,19 @@ __all__ = [
     "ResourceList",
     "ProcessList",
     "ProcessUpdate",
+    "ProcessInnerSon",
     "SchedulerCreate",
     "SchedulerList",
-    "SchedulerInner"
+    "SchedulerInner",
+    "InstanceList",
+    "InstanceInfo",
+    "InstanceVariablesList",
+    "InstanceTaskListInner",
+    "InstanceStateEnum",
+    "InstanceExecuteTypeEnum",
+    "PageSizeEnum"
 ]
 
 from .response import *
-from .response_inner import ProjectInner, SchedulerInner
+from .response_inner import ProjectInner, ProcessInnerSon, SchedulerInner, InstanceTaskListInner
+from .custom_enum import InstanceStateEnum, InstanceExecuteTypeEnum, PageSizeEnum
