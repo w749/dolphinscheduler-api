@@ -36,8 +36,7 @@ class ResourceHandle(object):
         total_resources = resource_list_instance.data
         if echo:
             self._logging.info("Get {} resources. info is: ".format(len(total_resources)))
-            for resource in total_resources:
-                self._logging.info(object_to_json(resource))
+            self._logging.info("\n" + "\n".join([object_to_json(x) for x in total_resources]))
         return total_resources
 
     def get_resource_info(self, filename):

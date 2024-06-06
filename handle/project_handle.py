@@ -49,8 +49,7 @@ class ProjectHandle(object):
         total_projects = project_list_instance.data
         if echo:
             self._logging.info("Get {} projects. info is: ".format(len(total_projects)))
-            for project in total_projects:
-                self._logging.info(object_to_json(project))
+            self._logging.info("\n" + "\n".join([object_to_json(x) for x in total_projects]))
         return total_projects
 
     def get_project_id(self):

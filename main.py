@@ -1,7 +1,6 @@
 import argparse
-import subprocess
 
-from adapt import default_encoding
+from adapt import default_encoding, adapt_subprocess_run
 default_encoding()
 
 if __name__ == '__main__':
@@ -18,23 +17,23 @@ if __name__ == '__main__':
     args, unknown = parser.parse_known_args()
 
     if args.token:
-        subprocess.run(["python", "handle/token_handle.py"] + unknown)
+        adapt_subprocess_run(["python", "handle/token_handle.py"] + unknown)
     elif args.project:
-        subprocess.run(["python", "handle/project_handle.py"] + unknown)
+        adapt_subprocess_run(["python", "handle/project_handle.py"] + unknown)
     elif args.tenant:
-        subprocess.run(["python", "handle/tenant_handle.py"] + unknown)
+        adapt_subprocess_run(["python", "handle/tenant_handle.py"] + unknown)
     elif args.queue:
-        subprocess.run(["python", "handle/queue_handle.py"] + unknown)
+        adapt_subprocess_run(["python", "handle/queue_handle.py"] + unknown)
     elif args.resource:
-        subprocess.run(["python", "handle/resource_handle.py"] + unknown)
+        adapt_subprocess_run(["python", "handle/resource_handle.py"] + unknown)
     elif args.process:
-        subprocess.run(["python", "handle/process_handle.py"] + unknown)
+        adapt_subprocess_run(["python", "handle/process_handle.py"] + unknown)
     elif args.run:
-        subprocess.run(["python", "handle/run_handle.py"] + unknown)
+        adapt_subprocess_run(["python", "handle/run_handle.py"] + unknown)
     elif args.instance:
-        subprocess.run(["python", "handle/instance_handle.py"] + unknown)
+        adapt_subprocess_run(["python", "handle/instance_handle.py"] + unknown)
     elif args.scheduler:
-        subprocess.run(["python", "handle/scheduler_handle.py"] + unknown)
+        adapt_subprocess_run(["python", "handle/scheduler_handle.py"] + unknown)
     else:
         parser.print_help()
 

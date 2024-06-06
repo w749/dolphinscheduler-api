@@ -1,4 +1,6 @@
+# coding=utf-8
 import platform
+import subprocess
 
 """
 解决python2和python3的兼容性问题
@@ -16,6 +18,9 @@ if VERSION == 2:
 
     def adapt_open(filename, method):
         return open(filename, method)
+
+    def adapt_subprocess_run(args):
+        return subprocess.call(args)
 else:
     import cattrs
     adapt_cattrs = cattrs
@@ -25,3 +30,6 @@ else:
 
     def adapt_open(filename, method):
         return open(filename, method, encoding="utf-8")
+
+    def adapt_subprocess_run(args):
+        return subprocess.run(args)

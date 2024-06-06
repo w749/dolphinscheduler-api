@@ -1,3 +1,4 @@
+# coding=utf-8
 from typing import List
 
 from attr import attrs, attrib
@@ -78,7 +79,7 @@ class ResourceInner(Inner):
     name = attrib(type=str, default="")
     fullName = attrib(type=str, default="")
     description = attrib(type=str, default="")
-    children = attrib(type=list, default=[])
+    children = attrib(type=List, default=[])
     type = attrib(type=str, default="")
     currentDir = attrib(type=str, default="")
     idValue = attrib(type=str, default="")

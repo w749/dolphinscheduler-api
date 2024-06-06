@@ -1,13 +1,13 @@
 {
   "ds":{
-    "baseUrl":"http://10.10.3.14:12345/dolphinscheduler",
     "username":"admin",
-    "password":"dolphinscheduler123",
-    "tokenExpireTime":"2026-01-01 00:00:00",
-    "token":"07b2d423fd298b7bfa1fc065554fac86",
-    "project":"haohan",
-    "tenant":"hdfs",
     "queue":"default",
-    "schedulerFile": "scheduler.json"
+    "schedulerFile":"scheduler.json",
+    "baseUrl":"http://10.10.3.14:12345/dolphinscheduler",
+    "tokenExpireTime":"2026-01-01 00:00:00",
+    "project":"haohan",
+    "token":"07b2d423fd298b7bfa1fc065554fac86",
+    "password":"dolphinscheduler123",
+    "tenant":"hdfs"
   }
 }

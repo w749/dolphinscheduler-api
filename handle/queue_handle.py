@@ -62,8 +62,7 @@ class QueueHandle(object):
         total_queues = queue_list_instance.data
         if echo:
             self._logging.info("Get {} queues. info is: ".format(len(total_queues)))
-            for queue in total_queues:
-                self._logging.info(object_to_json(queue))
+            self._logging.info("\n" + "\n".join([object_to_json(x) for x in total_queues]))
         return total_queues
 
     def get_queue_id(self):

@@ -190,7 +190,7 @@ if __name__ == '__main__':
     subparsers = parser.add_subparsers(dest="subparsers_name")
 
     # instance list
-    list_parser = subparsers.add_parser("list", help="Instance list operation.")
+    list_parser = subparsers.add_parser("list", help="Instance list operation, run -h get help.")
     list_group = list_parser.add_argument_group("list_group", "instance list group.")
     list_group.add_argument("-p", "--process", metavar="code", help="process code, default ALL")
     list_group.add_argument("-n", "--page-no", dest="page_no", metavar="number", default="1",
@@ -207,7 +207,7 @@ if __name__ == '__main__':
     # instance variables
     var_parser = subparsers.add_parser("vars", help="Instance variables.")
     var_parser.add_argument("-i", "--id", metavar="id", dest="instance_id", required=True,
-                            help="get instance variables of id")
+                            help="instance id")
 
     # # instance info
     # info_parser = subparsers.add_parser("info", help="Instance variables.")
@@ -217,21 +217,21 @@ if __name__ == '__main__':
     # instance tasks
     task_parser = subparsers.add_parser("tasks", help="Instance tasks info.")
     task_parser.add_argument("-i", "--id", metavar="id", dest="instance_id", required=True,
-                             help="get instance tasks of id")
+                             help="instance id")
 
     # instance execute
     task_parser = subparsers.add_parser("instance", help="Instance operation.")
     task_parser.add_argument("-i", "--id", metavar="id", dest="instance_id", required=True,
-                             help="get instance tasks of id")
+                             help="instance id")
     task_parser.add_argument("-t", "--type", dest="execute_type", metavar="type", required=True,
                              help="execute type, select a number: {}".format(get_enum_member_json(InstanceExecuteTypeEnum)))
 
     # task execute
-    task_parser = subparsers.add_parser("task", help="Instance task operation.")
+    task_parser = subparsers.add_parser("run", help="Instance task rerun.")
     task_parser.add_argument("-i", "--id", metavar="id", dest="instance_id", required=True,
-                             help="get instance tasks of id")
+                             help="instance id")
     task_parser.add_argument("-c", "--code", dest="task_code", metavar="task_code", required=True,
-                             help="task code, tasks info taskCode field")
+                             help="task code, run tasks command get taskCode field")
 
     args = parser.parse_args()
 
@@ -253,7 +253,7 @@ if __name__ == '__main__':
         handle.instance_tasks(args.instance_id)
     elif args.subparsers_name == "instance":
         handle.instances_execute(args.instance_id, get_attribute_of_enum(args.execute_type, InstanceExecuteTypeEnum))
-    elif args.subparsers_name == "task":
+    elif args.subparsers_name == "run":
         handle.task_execute(args.instance_id, args.task_code)
     else:
         parser.print_help()

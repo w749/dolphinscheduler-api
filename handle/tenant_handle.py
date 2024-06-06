@@ -66,8 +66,7 @@ class TenantHandle(object):
         total_tenants = tenant_list_instance.data
         if echo:
             self._logging.info("Get {} tenants. info is: ".format(len(total_tenants)))
-            for tenant in total_tenants:
-                self._logging.info(object_to_json(tenant))
+            self._logging.info("\n" + "\n".join([object_to_json(x) for x in total_tenants]))
         return total_tenants
 
     def delete_tenant(self, tenant_name):

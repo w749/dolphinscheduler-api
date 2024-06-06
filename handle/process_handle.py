@@ -87,7 +87,8 @@ class ProcessHandle(object):
             self._logging.info("Process import success of {}".format(filepath))
             self.process_list()
         else:
-            self._logging.error("Process import failed of {}, msg is '{}'".format(filepath, base_instance.msg))
+            self._logging.error("Process import failed of {}, maybe the format is wrong, msg is '{}'"
+                                .format(filepath, base_instance.msg))
 
     def release_process(self, process_code, is_online=True):
         """
@@ -150,6 +151,7 @@ class ProcessHandle(object):
             2. Modify downloaded process file, The parameters that can be modified are: [processDefinition.name, 
                 processDefinition.globalParamList, taskDefinitionList, processTaskRelationList].
             3. Provide the modified filepath to --update.
+            4. There is also the [taskParams.mainJar.resourceName] parameter, must ensure that the resource exists.
             """)
             sys.exit(-1)
         # 读取工作流内容
@@ -207,7 +209,7 @@ if __name__ == '__main__':
     parser.add_argument("-l", "--list", action="store_true", help="get process list")
     parser.add_argument("-i", "--import", dest="im", metavar="filepath", help="import process, need a filepath")
     parser.add_argument("-e", "--export", metavar="code", help="export process, need process code, run -l get it")
-    parser.add_argument("-n", "--inline", metavar="code", help="inline process, need process code, run -l get it")
+    parser.add_argument("-n", "--online", metavar="code", help="online process, need process code, run -l get it")
     parser.add_argument("-o", "--offline", metavar="code", help="offline process, need process code, run -l get it")
     parser.add_argument("-d", "--delete", metavar="code", help="delete process, need process code, run -l get it")
     parser.add_argument("-u", "--update", metavar="filepath", help="update process, need a filepath")
@@ -222,8 +224,8 @@ if __name__ == '__main__':
         handle.import_process(args.im)
     elif args.export:
         handle.export_process(int(args.export))
-    elif args.inline:
-        handle.release_process(int(args.inline))
+    elif args.online:
+        handle.release_process(int(args.online))
     elif args.offline:
         handle.release_process(int(args.offline), False)
     elif args.delete:

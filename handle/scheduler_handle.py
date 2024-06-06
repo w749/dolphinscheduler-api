@@ -13,7 +13,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + "/../")
 from settings import SETTINGS
 from handle import ProjectHandle, ProcessHandle
 from common import BaseResponse, SchedulerList, SchedulerInner
-from utils import url_join, request_post, get_logger, read_file, request_put, object_from_json
+from utils import url_join, request_post, get_logger, read_file, request_put, object_from_json, object_to_json
 
 
 class SchedulerHandle(object):
@@ -92,8 +92,7 @@ class SchedulerHandle(object):
         total_schedulers = scheduler_list_instance.data
         if echo:
             self._logging.info("Get {} schedulers. info is: ".format(len(total_schedulers)))
-            for scheduler in total_schedulers:
-                self._logging.info(json.dumps(self._get_scheduler_info_inner(scheduler)))
+            self._logging.info("\n" + "\n".join([json.dumps(self._get_scheduler_info_inner(x)) for x in total_schedulers]))
         return total_schedulers
 
     def create_schedule(self, process_code):

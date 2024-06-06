@@ -63,12 +63,13 @@ class RunHandle(object):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Dolphin Scheduler complement data operation.")
     parser.add_argument("-c", "--code", required=True, metavar="code", help="process code, run process -l get it")
-    parser.add_argument("-s", "--start", metavar="start_time", help="start time, default now, eg: 20240420200000")
-    parser.add_argument("-e", "--end", metavar="end_time", help="end time, default now, eg: 20240420200000")
+    parser.add_argument("-s", "--start", metavar="start_time", help="start time, default now, need "
+                                                                    "use quotation marks, eg: '2024-05-01 00:00:00'")
+    parser.add_argument("-e", "--end", metavar="end_time", help="end time, default now, need "
+                                                                "use quotation marks, eg: '2024-05-01 00:00:00'")
     parser.add_argument("-t", "--tenant", metavar="tenant", default="hdfs", help="tenant code, default hdfs")
     args = parser.parse_args()
 
-    _datetime_parse = "%Y%m%d%H%M%S"
     _datetime_format = "%Y-%m-%d %H:%M:%S"
     handle = RunHandle()
 
@@ -76,16 +77,8 @@ if __name__ == '__main__':
     end = datetime.now().strftime(_datetime_format)
     tenant = args.tenant
     if args.start:
-        try:
-            start = datetime.strptime(args.start, _datetime_parse).strftime(_datetime_format)
-        except Exception:
-            print("Parse start time {} error, eg: 20240420200000".format(args.start))
-            sys.exit(-1)
+        start = args.start
     if args.end:
-        try:
-            end = datetime.strptime(args.end, _datetime_parse).strftime(_datetime_format)
-        except Exception:
-            print("Parse end time {} error, eg: 20240420200000".format(args.end))
-            sys.exit(-1)
+        end = args.end
 
     handle.run(args.code, start, end, tenant)
