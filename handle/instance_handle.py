@@ -192,7 +192,8 @@ if __name__ == '__main__':
     # instance list
     list_parser = subparsers.add_parser("list", help="Instance list operation, run -h get help.")
     list_group = list_parser.add_argument_group("list_group", "instance list group.")
-    list_group.add_argument("-p", "--process", metavar="code", help="process code, default ALL")
+    list_group.add_argument("-p", "--process-code", dest="process_code", metavar="code",
+                            help="process code, default ALL")
     list_group.add_argument("-n", "--page-no", dest="page_no", metavar="number", default="1",
                             help="page number, default 1")
     list_group.add_argument("-s", "--page-size", dest="page_size", metavar="size", default="10",
@@ -215,16 +216,16 @@ if __name__ == '__main__':
     #                          help="get instance info of id")
 
     # instance tasks
-    task_parser = subparsers.add_parser("tasks", help="Instance tasks info.")
-    task_parser.add_argument("-i", "--id", metavar="id", dest="instance_id", required=True,
-                             help="instance id")
+    tasks_parser = subparsers.add_parser("tasks", help="Instance tasks info.")
+    tasks_parser.add_argument("-i", "--id", metavar="id", dest="instance_id", required=True,
+                              help="instance id")
 
     # instance execute
-    task_parser = subparsers.add_parser("instance", help="Instance operation.")
-    task_parser.add_argument("-i", "--id", metavar="id", dest="instance_id", required=True,
-                             help="instance id")
-    task_parser.add_argument("-t", "--type", dest="execute_type", metavar="type", required=True,
-                             help="execute type, select a number: {}".format(get_enum_member_json(InstanceExecuteTypeEnum)))
+    instance_parser = subparsers.add_parser("instance", help="Instance operation.")
+    instance_parser.add_argument("-i", "--id", metavar="id", dest="instance_id", required=True,
+                                 help="instance id")
+    instance_parser.add_argument("-t", "--type", dest="execute_type", metavar="type", required=True,
+                                 help="execute type, select a number: {}".format(get_enum_member_json(InstanceExecuteTypeEnum)))
 
     # task execute
     task_parser = subparsers.add_parser("run", help="Instance task rerun.")
@@ -238,7 +239,7 @@ if __name__ == '__main__':
     handle = InstanceHandle()
 
     if args.subparsers_name == "list":
-        arg_process_code = args.process
+        arg_process_code = args.process_code
         arg_page_no = args.page_no
         arg_page_size = get_attribute_of_enum(args.page_size, PageSizeEnum, False, 10)
         arg_state_type = get_attribute_of_enum(args.state, InstanceStateEnum)

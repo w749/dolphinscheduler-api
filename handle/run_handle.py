@@ -67,7 +67,7 @@ if __name__ == '__main__':
                                                                     "use quotation marks, eg: '2024-05-01 00:00:00'")
     parser.add_argument("-e", "--end", metavar="end_time", help="end time, default now, need "
                                                                 "use quotation marks, eg: '2024-05-01 00:00:00'")
-    parser.add_argument("-t", "--tenant", metavar="tenant", default="hdfs", help="tenant code, default hdfs")
+    parser.add_argument("-t", "--tenant-code", dest="tenant", metavar="tenant", default="hdfs", help="tenant code, default hdfs")
     args = parser.parse_args()
 
     _datetime_format = "%Y-%m-%d %H:%M:%S"
