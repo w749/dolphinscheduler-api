@@ -41,8 +41,7 @@ class ProcessHandle(object):
         total_precesses = process_list_instance.data
         if echo:
             self._logging.info("Get {} processes. info is: ".format(len(total_precesses)))
-            for precess in total_precesses:
-                self._logging.info(object_to_json(precess.processDefinition))
+            self._logging.info("\n" + "\n".join([object_to_json(x.processDefinition) for x in total_precesses]))
         return total_precesses
 
     def export_process(self, process_code):

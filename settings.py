@@ -52,6 +52,8 @@ class Config(object):
                           "Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0",
             "token": self.TOKEN
         }
+        if self.TOKEN == "":
+            raise RuntimeError("token is empty, please run [python main.py --token --create] first")
 
     def rewrite_token(self, token):
         """
